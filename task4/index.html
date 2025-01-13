@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container" id="introScreen">
+        <h1>Welcome to the QUIZ Challenge</h1>
+        <p id="animatedTitle"><span>K</span><span>N</span><span>O</span><span>W</span><span>L</span><span>E</span><span>D</span><span>G</span><span>E</span></p>
+        <button class="btn" id="startButton">Begin</button>
+    </div>
+
+    <div class="container hidden" id="userInputScreen">
+        <h1>Enter Your Details</h1>
+        <p>Please provide your name to start the quiz:</p>
+        <input type="text" id="playerName" placeholder="Your Name Here" />
+        <button class="btn" id="submitNameButton">Proceed</button>
+    </div>
+
+    <div class="container hidden" id="quizScreen">
+        <h1 id="currentQuestion"></h1>
+        <div id="optionsContainer"></div>
+        <p>Time Left: <span id="countdown">15</span> seconds</p>
+    </div>
+
+    <div class="container hidden" id="completionScreen">
+        <h1>Quiz Completed!</h1>
+        <p id="resultMessage"></p>
+        <p>Your Score: <span id="finalScore"></span></p>
+        <button class="btn" id="restartButton">Try Again</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
