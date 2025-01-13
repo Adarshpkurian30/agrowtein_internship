@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIMPLE CALCULATOR SIMULATOR</title>
+  <style>
+  
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      min-height: 100vh;
+      background-color: #fff; 
+      font-family: 'Arial', sans-serif;
+      color: #333;
+    }
+
+    .calculator {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      padding: 30px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: row; 
+      justify-content: space-between; 
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .input-field, .select-field {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1.1rem;
+      outline: none;
+      width: 100%;
+      transition: border 0.3s;
+    }
+
+    .input-field:focus, .select-field:focus {
+      border-color: #6a11cb;
+    }
+
+    .select-field {
+      background: #f7f7f7;
+      cursor: pointer;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .button {
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      width: 48%;
+    }
+
+    .button.calculate {
+      background: #28a745;
+      color: #fff;
+    }
+
+    .button.calculate:hover {
+      background: #218838;
+      transform: scale(1.05);
+    }
+
+    .button.clear {
+      background: #dc3545;
+      color: #fff;
+    }
+
+    .button.clear:hover {
+      background: #c82333;
+      transform: scale(1.05);
+    }
+
+    .result {
+      font-size: 1.3rem;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div class="title">SIMPLE CALCULATOR SIMULATOR</div>
+    <div class="input-group">
+      <input type="number" id="num1" class="input-field" placeholder="Enter the first number" required>
+      <select id="operation" class="select-field">
+        <option value="add">Add (+)</option>
+        <option value="subtract">Subtract (-)</option>
+        <option value="multiply">Multiply (×)</option>
+        <option value="divide">Divide (÷)</option>
+        <option value="modulus">Modulus (%)</option>
+      </select>
+      <input type="number" id="num2" class="input-field" placeholder="Enter the second number" required>
+    </div>
+    <div class="buttons">
+      
+      <button class="button calculate" onclick="performCalculation()">Calculate</button>
+      <button class="button clear" onclick="resetCalculator()">Clear</button>
+    </div>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    
+    function performCalculation() {
+      const firstNumber = parseFloat(document.getElementById("num1").value);
+      const secondNumber = parseFloat(document.getElementById("num2").value);
+      const selectedOperation = document.getElementById("operation").value;
+      const displayResult = document.getElementById("result");
+
+      try {
+        if (isNaN(firstNumber) || isNaN(secondNumber)) {
+          throw new Error("Both inputs must be valid numbers.");
+        }
+
+        let outcome;
+
+        switch (selectedOperation) {
+          case "add":
+            outcome = firstNumber + secondNumber;
+            break;
+          case "subtract":
+            outcome = firstNumber - secondNumber;
+            break;
+          case "multiply":
+            outcome = firstNumber * secondNumber;
+            break;
+          case "divide":
+            if (secondNumber === 0) throw new Error("Cannot divide by zero.");
+            outcome = firstNumber / secondNumber;
+            break;
+          case "modulus":
+            if (secondNumber === 0) throw new Error("Cannot divide by zero.");
+            outcome = firstNumber % secondNumber;
+            break;
+          default:
+            throw new Error("Invalid operation selected.");
+        }
+
+        displayResult.textContent = `Result: ${outcome}`;
+        displayResult.classList.remove("error");
+      } catch (error) {
+        displayResult.textContent = error.message;
+        displayResult.classList.add("error");
+      }
+    }
+
+    
+    function resetCalculator() {
+      document.getElementById("num1").value = "";
+      document.getElementById("num2").value = "";
+      document.getElementById("operation").value = "add";
+      document.getElementById("result").textContent = "";
+    }
+  </script>
+</body>
+</html>
